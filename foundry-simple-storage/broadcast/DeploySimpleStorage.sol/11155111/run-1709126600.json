@@ -1,0 +1,38 @@
+{
+  "transactions": [
+    {
+      "hash": "0xc4309974def82520e35e671c9f1c1538e6272b8e6f714585809ee4e23b5e8940",
+      "transactionType": "CREATE",
+      "contractName": "SimpleStorage",
+      "contractAddress": "0x6472c382C651f5D7aB9dB4EF4FbB65b54a8845c3",
+      "function": null,
+      "arguments": null,
+      "transaction": {
+        "type": "0x02",
+        "from": "0xef63af768f7aafb393eba6ac0bf602040e6490d1",
+        "gas": "0x1cbd4",
+        "value": "0x0",
+        "data": "0x6080604052348015600f57600080fd5b5060ac8061001e6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c80632e64cec11460375780636057361d14604c575b600080fd5b60005460405190815260200160405180910390f35b605c6057366004605e565b600055565b005b600060208284031215606f57600080fd5b503591905056fea2646970667358221220d357393de0e59330578c693b35b1038a98a79c28b4dd2f961b18f733968485a464736f6c63430008130033",
+        "nonce": "0xd8",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0xc4309974def82520e35e671c9f1c1538e6272b8e6f714585809ee4e23b5e8940"
+  ],
+  "returns": {
+    "0": {
+      "internal_type": "contract SimpleStorage",
+      "value": "0x6472c382C651f5D7aB9dB4EF4FbB65b54a8845c3"
+    }
+  },
+  "timestamp": 1709126600,
+  "chain": 11155111,
+  "multi": false,
+  "commit": "bf69f4f"
+}

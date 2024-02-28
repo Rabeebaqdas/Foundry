@@ -7,7 +7,6 @@ pragma solidity ^0.8.19;
  * @custom:dev-run-script ./scripts/deploy_with_ethers.ts
  */
 contract SimpleStorage {
-
     uint256 number;
 
     /**
@@ -19,10 +18,10 @@ contract SimpleStorage {
     }
 
     /**
-     * @dev Return value 
+     * @dev Return value
      * @return value of 'number'
      */
-    function retrieve() public view returns (uint256){
+    function retrieve() public view returns (uint256) {
         return number;
     }
 }
