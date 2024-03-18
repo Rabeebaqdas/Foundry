@@ -1,40 +1,49 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+// 1. Pragma
+pragma solidity ^0.8.19;
+// 2. Imports
 
-import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import {PriceConverter} from "./PriceConverter.sol";
 
-error NotOwner();
+// 3. Interfaces, Libraries, Contracts
+error FundMe__NotOwner();
 
+/**
+ * @title A sample Funding Contract
+ * @author Patrick Collins
+ * @notice This contract is for creating a sample funding contract
+ * @dev This implements price feeds as our library
+ */
 contract FundMe {
     using PriceConverter for uint256;
 
     mapping(address => uint256) public addressToAmountFunded;
     address[] public funders;
-
+   AggregatorV3Interface private priceFeed; 
     // Could we make this constant?  /* hint: no! We should make it immutable! */
     address public /* immutable */ i_owner;
     uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
     
-    constructor() {
+    constructor(address _priceFeed) {
+        priceFeed = AggregatorV3Interface(_priceFeed);
         i_owner = msg.sender;
     }
 
     function fund() public payable {
-        require(msg.value.getConversionRate() >= MINIMUM_USD, "You need to spend more ETH!");
+        require(msg.value.getConversionRate(priceFeed) >= MINIMUM_USD, "You need to spend more ETH!");
         // require(PriceConverter.getConversionRate(msg.value) >= MINIMUM_USD, "You need to spend more ETH!");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
     }
     
     function getVersion() public view returns (uint256){
-        AggregatorV3Interface priceFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
         return priceFeed.version();
     }
     
     modifier onlyOwner {
         // require(msg.sender == owner);
-        if (msg.sender != i_owner) revert NotOwner();
+        if (msg.sender != i_owner) revert FundMe__NotOwner();
         _;
     }
     
@@ -85,5 +94,3 @@ contract FundMe {
 // 5. abi.encode / decode
 // 6. Hash with keccak256
 // 7. Yul / Assembly
-
-
